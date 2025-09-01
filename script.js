@@ -53,3 +53,21 @@ function uniqueLongestString(s){
 // uniqueLongestString('abcadcbabc')
 
 
+// find pairs of array elements whose sum is equal to given paramenter
+
+function sumOfTwo(arr, result){
+    let obj = {}
+    let pairs = [];
+    for(let i = 0; i < arr.length; i++){
+        if(obj[arr[i]] !== undefined){
+            
+            pairs.push([obj[arr[i]], i])
+        } 
+        obj[result - arr[i]] = i;
+        
+    }
+    console.log(pairs);
+    return pairs
+}
+
+sumOfTwo([2,7,11,15], 9)
