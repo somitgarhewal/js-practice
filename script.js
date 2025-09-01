@@ -42,7 +42,7 @@ function uniqueLongestString(s){
             }
             right++;
         } else{
-            set.delete(s[right]);
+            set.delete(s[left]);
             left++;
         }
     }
@@ -86,4 +86,36 @@ function validAnagrams(a,b){
     }
     return true
 }
-console.log(validAnagrams("listen", "silent"))
+// console.log(validAnagrams("listen", "silent"))
+
+
+function uniqueLongestString2(s){
+    let resultSet = new Set();
+    let set = new Set();
+    let left = 0, right = 0, maxLen = 0, startIndex = 0;
+    while(right < s.length){        
+        if(!set.has(s[right])){
+            set.add(s[right]);
+            console.log(right - left);
+            
+            if((right - left) + 1 > maxLen){
+                maxLen = (right - left) + 1;
+                startIndex = left;
+                resultSet.clear();
+                resultSet.add(s.substring(left, right+1))
+            } else if((right - left) + 1 === maxLen){
+               resultSet.add(s.substring(left, right+1))
+            }
+            right++;
+        } else {
+            set.delete(s[left]);
+            left++;
+        }
+    }
+    console.log('result all pairs', resultSet);
+
+    console.log('result', s.substring(startIndex, maxLen + startIndex))
+    
+}
+
+uniqueLongestString2('abcadcbabc')
