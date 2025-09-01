@@ -70,4 +70,20 @@ function sumOfTwo(arr, result){
     return pairs
 }
 
-sumOfTwo([2,7,11,15], 9)
+// sumOfTwo([2,7,11,15], 9)
+
+// valid Anagrams
+
+function validAnagrams(a,b){
+    if(a.length !== b.length) return false
+    let obj = {}
+    for(let i = 0; i < a.length; i++){
+        obj[a[i]] = ( obj[a[i]] + 1 || 1)
+    }
+    for(let i = 0; i < b.length; i++){
+       if(!obj[b[i]]) return false;
+       obj[b[i]]--;
+    }
+    return true
+}
+console.log(validAnagrams("listen", "silent"))
