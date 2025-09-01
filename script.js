@@ -118,4 +118,37 @@ function uniqueLongestString2(s){
     
 }
 
-uniqueLongestString2('abcadcbabc')
+// uniqueLongestString2('abcadcbabc')
+
+// find Subsets in array With given Sum
+
+// at each step we have to decide weather to include that no. or not
+// we keep tracking currentSum
+// if currentSum == k, we have pairs
+// if currentSum > k, prune the tracking
+
+
+function findSubsetsWithSum(arr, k){
+    let result = [];
+
+    function backTrack(start, currentSubset, currentSum){
+        if(currentSum === k){
+            result.push([...currentSubset])
+            return;
+        }
+        if(currentSum > k || start > arr.length){
+            return // prune tracking
+        }
+        for(let i = start; i < arr.length; i++){
+            currentSubset.push(arr[i]);
+            backTrack(i+1, currentSubset, currentSum + arr[i]);
+            currentSubset.pop();
+        }
+    }
+
+    backTrack(0, [], 0)
+    console.log('result', result);
+
+}
+
+findSubsetsWithSum([1,2,3], 3)
