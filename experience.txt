@@ -1,0 +1,113 @@
+SDE - 2 | Frontend
+🧠 Problem Statement - 1
+You're building a browser's Web Page Cache Manager, which stores the most
+recently accessed pages in memory. Each web page is identified by a pageId (an
+integer) and has some content (let’s say string, for simplicity).
+Due to limited memory, the cache can only hold a fixed number of pages. When a
+page is accessed or stored:
+By default the size of the cache should be 2, but should be configurable.
+If it’s already in the cache, update its position to mark it as recently accessed.
+If it’s new and the cache is full, evict the page with longest inactivity before
+inserting the new one.
+If the page does not exist, return None .
+
+Example :
+Initialize cache with capacity = 2
+putPage(1, "Google") → Inserts page 1
+putPage(2, "YouTube") → Inserts page 2
+getPage(1) → Returns "Google"
+putPage(3, "GitHub") → Evicts page 2 ("YouTube"), inserts page 3
+getPage(2) → Returns None (was evicted)
+putPage(1, "Google.com") → Updates content of page 1
+getPage(1) → Returns "Google.com"
+
+🔒 Constraints
+All operations must run in O(1) average time.
+1 <= pageId, content <= 10^4
+
+SDE - 2 | Frontend 1
+
+1 <= maxPages <= 3000
+
+🧠 Problem Statement -2
+A chemical processing company has developed a new machine that mixes
+elements in a given sequence to form a final compound. However, due to a known
+instability, if two identical chemical elements appear next to each other, they
+react and both are destroyed.
+You are given a string where each character represents a type of chemical
+element (e.g., 'A', 'B', 'C', etc.).
+Your task is to simulate the mixing process. Whenever two adjacent elements
+are the same, they react and are removed from the sequence. This reaction may
+continue as new adjacent pairs form.
+Return the resulting stable compound as a string after all possible reactions.
+If the compound is completely destroyed, return an empty string.
+
+Example 1:
+Input: compound = "ABBACCD"
+Output: compound = "D"
+Explaination:
+Step 1: Remove 'BB' → "AACCD"
+Step 2: Remove 'AA' → "CCD"
+Step 3: Remove 'CC' → "D"
+Final stable compound: "D"
+
+Example 2:
+Input: compound = "ABCDEFG"
+Output: compound = "ABCDEFG"
+
+SDE - 2 | Frontend 2
+
+Explaination:
+No two adjacent elements are same hence final product is also the same
+
+🔒 Constraints
+1 <= sequence.length <= 10^5
+sequence[i] is an uppercase English letter.
+
+
+
+
+
+Interviewer - Subhra Jyoti
+
+
+
+
+
+
+const cacheSize = 2
+let map = new Map();
+function putPage(pageId, content){
+    const page={pageId: pageId, content: content}
+    if(map.has(page.pageId)){
+        map.delete(page.pageId)
+        map.set(page.pageId, page.content)
+    }else{
+      if(map.entries().toArray().length === cacheSize){
+            map.delete(map.entries().toArray()[0][0]);
+            map.set(page.pageId, page.content)
+        } else {
+            map.set(page.pageId, page.content)
+        }
+    }
+}
+
+function getPage(id){
+    
+    if(map.has(id)){
+        let content = map.get(id)
+        map.delete(id)
+        map.set(id, content)
+        return (map.get(id))
+    } else return "none";
+}
+
+
+putPage(1, "Google") 
+putPage(2, "YouTube") 
+console.log(getPage(1))
+putPage(3, "GitHub")
+console.log(getPage(2))
+putPage(1, "Google.com")
+console.log(getPage(1))
+console.log('cache', map)

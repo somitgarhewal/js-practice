@@ -151,4 +151,19 @@ function findSubsetsWithSum(arr, k){
 
 }
 
-findSubsetsWithSum([1,2,3], 3)
+// findSubsetsWithSum([1,2,3], 3)
+
+
+// function findContinuosSubsetsWithSum(arr, k){
+//     let prefixSum = 0;
+//     let obj = {0: 1}
+
+//     for(element in arr){
+//         prefixSum += element;
+
+//         if(prefixSum - k in obj){
+//             count 
+//         }
+//     }
+// }
+
